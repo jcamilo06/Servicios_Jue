@@ -51,5 +51,30 @@ namespace Servicios_Jue.Clases
                 return "Error: " + ex.Message;
             }
         }
+        public string ModificarActivo(int Codigo, bool Activo)
+        {
+            try
+            {
+                TIpoPRoducto tipoProd = Consultar(tipoProducto.Codigo);
+                if (tipoProd == null)
+                {
+                    return "El tipo producto no existe en la base de datos";
+                }
+                tipoProd.Activo = Activo;
+                dbSuper.SaveChanges();
+                if(Activo)
+                {
+                    return "Se activo el tipo de producto";
+                }
+                else
+                {
+                    return "Se desactivó el tipo de producto";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
     }
 }
